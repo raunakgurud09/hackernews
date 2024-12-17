@@ -1,16 +1,21 @@
 import Navbar from "@/components/Navbar";
 import React from "react";
 
+type tParams = Promise<{ type: string }>;
+type tSearchParams = Promise<{ page: string }>;
+
 export default async function Page({
   params,
   searchParams,
 }: {
-  params: { type: string };
-  searchParams: { [key: string]: string | undefined };
+  params: tParams;
+  searchParams: tSearchParams;
 }) {
   const itemsPerPage = 20;
-  const { page } = (await searchParams) || 1;
   const { type } = await params;
+  // TODO: fix this error in console
+  // use { page } here and also manage type on the page
+  const { page } = (await searchParams) || 1;
 
   const apiEndpoints: Record<string, string> = {
     top: "https://hacker-news.firebaseio.com/v0/topstories.json",
@@ -28,7 +33,6 @@ export default async function Page({
   const end = start + itemsPerPage;
   const hasNextPage = storyIds.length > end;
 
-  // Fetch details of posts for the current page
   const posts = await Promise.all(
     storyIds.slice(start, end).map(async (id: number) => {
       const post = await fetch(
@@ -46,16 +50,12 @@ export default async function Page({
   return (
     <main className="p-10">
       <Navbar />
-      <h1>Hacker News Top Stories (Page {page})</h1>
+      <h1 className="font-bold text-2xl mb-4">
+        Hacker News Top Stories (Page {page})
+      </h1>
       {posts.map((post, idx) => (
         <div key={idx}>
           <h3>{post.title}</h3>
-          {/* <p>By: {post.by}</p>
-          {post.url && (
-            <a href={post.url} target="_blank" rel="noopener noreferrer">
-              Read more
-            </a>
-          )} */}
         </div>
       ))}
 
