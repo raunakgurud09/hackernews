@@ -1,4 +1,6 @@
 import Navbar from "@/components/Navbar";
+import { MessageCircle, Triangle } from "lucide-react";
+import Link from "next/link";
 import React from "react";
 
 type tParams = Promise<{ type: string }>;
@@ -48,16 +50,50 @@ export default async function Page({
   );
 
   return (
-    <main className="p-10">
+    <main className="">
       <Navbar />
       <h1 className="font-bold text-2xl mb-4">
-        Hacker News Top Stories (Page {page})
+        Hacker News -- {type} stories (Page {page})
       </h1>
-      {posts.map((post, idx) => (
-        <div key={idx}>
-          <h3>{post.title}</h3>
-        </div>
-      ))}
+      <div className="flex flex-col gap-8">
+        {posts.map((post, idx) => (
+          <div key={idx} className="flex flex-col gap-2">
+            <div className="flex gap-2 font-lg items-center">
+              <div className="bg-foreground w-9 h-9 rounded-full"></div>
+              <div>
+                <p className="font-medium">
+                  {post.by
+                    ? post.by.charAt(0).toUpperCase() + post.by.slice(1)
+                    : "Unknown"}
+                </p>
+                <p className="hover:underline text-xs cursor-pointer animate-in transition-all">
+                  #{post?.id}
+                </p>
+              </div>
+            </div>
+            <h3 className="text-2xl hover:text-primary animate-in transition-all ">
+              <Link target="_blank" href={post.url ?? ""}>
+                {post.title}
+              </Link>
+            </h3>
+            {post.text ? (
+              <p>{post.text?.slice(0, 100) + "..."}</p>
+            ) : (
+              <p className="text-secondary">No supporting text</p>
+            )}
+            <div className="flex gap-4">
+              <div className="flex items-center justify-center gap-1 bg-secondary border-foreground rounded-md px-2 py-1">
+                <MessageCircle size={17} />
+                <p>Comments</p>
+              </div>
+              <div className="flex items-center justify-center gap-1 bg-secondary border-foreground rounded-md px-2 py-1">
+                <Triangle size={17} />
+                <p>Upvote</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
 
       {/* Pagination Controls */}
       <div style={{ marginTop: "20px" }}>

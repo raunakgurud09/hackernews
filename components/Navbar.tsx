@@ -17,10 +17,10 @@ export default function Navbar() {
           style={{
             marginRight: "15px",
             textDecoration: pathname.includes(link) ? "underline" : "none",
-            color: pathname.includes(link) ? "blue" : "white",
+            color: pathname.includes(link) ? "#ff6600" : "white",
           }}
         >
-          {link}
+          {link && link?.charAt(0)?.toLocaleUpperCase() + link.slice(1)}
         </Link>
       ))}
     </nav>
