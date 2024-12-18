@@ -3,6 +3,7 @@ import { Geist_Mono, Poppins } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { Button } from "@/components/ui/button";
 
 // const geistSans = Geist({
 //   variable: "--font-geist-sans",
@@ -16,6 +17,7 @@ const geistMono = Geist_Mono({
 
 const poppins = Poppins({
   variable: "--font-poppins",
+  subsets: ["latin"],
   weight: ["100", "200", "300", "400", "500", "600", "700"],
 });
 
@@ -40,8 +42,8 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="w-full  border border-b sticky top-0 bg-background py-4">
-            <div className="max-w-[960px] mx-auto h-full flex items-center justify-between">
+          <div className="w-full border border-b sticky top-0 bg-background py-4">
+            <div className="container max-w-[960px] mx-auto h-full flex items-center justify-between">
               <div className="flex text-2xl font-mono font-medium items-center gap-1">
                 <div className="h-9 w-9 rounded-lg bg-primary flex items-center justify-center">
                   <span className="font-bold text-white text-xl font-mono">
@@ -52,9 +54,9 @@ export default function RootLayout({
               </div>
               <div className="flex gap-4 items-center">
                 <ThemeToggle />
-                <div className="h-9 w-9 border rounded-md flex items-center justify-center">
+                <Button variant="outline" size="icon">
                   1
-                </div>
+                </Button>
                 <div className="h-9 w-9 bg-foreground rounded-full"></div>
               </div>
             </div>

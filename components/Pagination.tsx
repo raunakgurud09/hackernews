@@ -17,11 +17,11 @@ export const PaginationComponent = ({
   page: number;
 }) => {
   return (
-    <div>
+    <div className="mt-20">
       <Pagination>
         <PaginationContent>
           <PaginationItem>
-            <PaginationPrevious href={`/${type}?page=1`} />
+            <PaginationPrevious href={`/${type}?page=${page - 1}`} />
           </PaginationItem>
           <PaginationItem>
             <PaginationLink href={`/${type}?page=1`}>1</PaginationLink>

@@ -33,7 +33,7 @@ export default async function Page({
 
   const start = (+page - 1) * itemsPerPage;
   const end = start + itemsPerPage;
-  const hasNextPage = storyIds.length > end;
+  // const hasNextPage = storyIds.length > end;
 
   const posts = await Promise.all(
     storyIds.slice(start, end).map(async (id: number) => {
@@ -52,32 +52,33 @@ export default async function Page({
   );
 
   return (
-    <main className="max-w-[960px] mx-auto">
+    <main className="max-w-[960px] mx-auto mb-40">
       <Navbar />
-      <h1 className="font-bold text-2xl mb-4">
-        Hacker News -- {type} stories (Page {page})
+      <h1 className="font-bold text-3xl mb-4 mt-8 ">
+        {type.charAt(0).toUpperCase() + type.slice(1)} stories
       </h1>
-      <div className="flex flex-col gap-8">
+      <div className="flex flex-col gap-12  py-4">
         {posts.map((post, idx) => {
           return <PostCard {...post} key={idx} />;
         })}
       </div>
       {/* Pagination Controls */}
-      <div style={{ marginTop: "20px" }}>
-        {+page > 1 && (
-          <a
-            href={`/${type}/?page=${+page - 1}`}
-            style={{ marginRight: "10px" }}
-          >
-            Previous Page
-          </a>
-        )}
-        {/* Next Page */}
-        {hasNextPage && (
-          <a href={`/${type}/?page=${+page + 1}`}>Next Page</a>
-        )}{" "}
-      </div>
       <PaginationComponent page={+page} type={type} />
     </main>
   );
 }
+
+// <div style={{ marginTop: "20px" }}>
+//   {+page > 1 && (
+//     <a
+//       href={`/${type}/?page=${+page - 1}`}
+//       style={{ marginRight: "10px" }}
+//     >
+//       Previous Page
+//     </a>
+//   )}
+//   {/* Next Page */}
+//   {hasNextPage && (
+//     <a href={`/${type}/?page=${+page + 1}`}>Next Page</a>
+//   )}{" "}
+// </div>
