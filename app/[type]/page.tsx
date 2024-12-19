@@ -1,5 +1,4 @@
 import { PostCard } from "@/components/common/PostCard";
-import Navbar from "@/components/Navbar";
 import { PaginationComponent } from "@/components/Pagination";
 import React from "react";
 
@@ -27,9 +26,10 @@ export default async function Page({
   };
   const apiUrl = apiEndpoints[type] || apiEndpoints["new"];
 
-  const storyIds = await fetch(apiUrl, { cache: "force-cache" }).then((res) =>
-    res.json()
-  );
+  const storyIds = await fetch(apiUrl, {
+    cache: "no-store",
+    next: { revalidate: 300 },
+  }).then((res) => res.json());
 
   const start = (+page - 1) * itemsPerPage;
   const end = start + itemsPerPage;
@@ -39,7 +39,7 @@ export default async function Page({
     storyIds.slice(start, end).map(async (id: number) => {
       const post = await fetch(
         `https://hacker-news.firebaseio.com/v0/item/${id}.json?print=pretty`,
-        { cache: "force-cache" }
+        { cache: "force-cache", next: { revalidate: 300 } }
       )
         .then((res) => res.json())
         .then((r) => {
@@ -52,12 +52,11 @@ export default async function Page({
   );
 
   return (
-    <main className="max-w-[960px] mx-auto mb-40">
-      <Navbar />
-      <h1 className="font-bold text-3xl mb-4 mt-8 ">
+    <main className="w-full overflow-y-auto max-h-[calc(100vh-70px)]">
+      <h1 className="font-bold text-3xl p-3 md:p-6">
         {type.charAt(0).toUpperCase() + type.slice(1)} stories
       </h1>
-      <div className="flex flex-col gap-12  py-4">
+      <div className="flex flex-col  ">
         {posts.map((post, idx) => {
           return <PostCard {...post} key={idx} />;
         })}
