@@ -1,12 +1,6 @@
 "use client";
 
-import { MessageCircle, Triangle } from "lucide-react";
-import Link from "next/link";
-import { Link as LinkIcon } from "lucide-react";
-import React, { useState } from "react";
-import { AnimatePresence, motion } from "motion/react";
-import { TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
-import { Tooltip } from "@radix-ui/react-tooltip";
+import React from "react";
 
 type PostCardProps = {
   id?: string;
@@ -16,14 +10,17 @@ type PostCardProps = {
   by?: string;
   time: number;
   score?: number;
+  type?: "story" | "comment" | "job" | "poll" | "pollopt";
   descendants?: number;
   kids?: number[];
 };
 
-import TimeDisplay from "./TimeDisplay";
-import { ProfileView } from "./ProfileView";
 import { Comments } from "./Comments";
 import { RenderText } from "./RenderText";
+import { PostcardHeader } from "../Postcard/PostcardHeader";
+import { PostCardH2 } from "../Postcard/PostcardH2";
+import { UpvoteSection } from "../Postcard/UpvoteSection";
+import { Comment } from "../Comments/Comment";
 
 export const PostCard = ({
   by,
@@ -35,154 +32,38 @@ export const PostCard = ({
   score = 0,
   descendants,
   kids,
+  type,
 }: PostCardProps) => {
-  const [showLink, setShowLink] = useState(false);
-  const [linkClicked, setLinkClicked] = useState(false);
-  const handleLinkClicked = () => {
-    navigator.clipboard.writeText(url);
-    setLinkClicked(true);
-
-    setTimeout(() => {
-      setLinkClicked(false);
-    }, 2000);
-  };
-
   return (
     <div className="flex w-full justify-between items-start border-b p-3 md:p-6">
       <div className="flex flex-col gap-2 w-full sm:w-[90%]">
-        <div className="flex gap-8">
-          <div className="flex gap-2 font-lg items-center ">
-            <ProfileView by={by} />
-            <div>
-              <p className="font-medium text-sm">
-                {by ? by.charAt(0).toUpperCase() + by.slice(1) : "Unknown"}
-              </p>
-              <p className="hover:underline text-muted-foreground text-xs cursor-pointer animate-in transition-all">
-                #{id}
-              </p>
-            </div>
-          </div>
-          <TimeDisplay time={time} />
-        </div>
+        <PostcardHeader by={by} id={id} type={type} time={time} />
 
-        <article className="ml-10">
-          <h2
-            className="w-full text-base animate-in transition-all flex items-center gap-2"
-            onMouseEnter={() => {
-              setShowLink(true);
-            }}
-            onMouseLeave={() => {
-              setShowLink(false);
-            }}
-          >
-            <Link target="_blank" href={url ?? ""}>
-              {title}{" "}
-              <AnimatePresence>
-                {showLink && (
-                  <motion.div
-                    initial={{
-                      x: "-10px",
-                      opacity: 0,
-                    }}
-                    animate={{
-                      x: "0px",
-                      opacity: 1,
-                    }}
-                    exit={{
-                      x: "-10px",
-                      opacity: 0,
-                    }}
-                    className="inline-flex"
-                  >
-                    <TooltipProvider>
-                      <Tooltip>
-                        <TooltipTrigger>
-                          <LinkIcon
-                            size={12}
-                            // color={linkClicked ? "#FF6600" : "#000"}
-                            onClick={(e) => {
-                              e.preventDefault();
-                              handleLinkClicked();
-                            }}
-                            className="cursor-pointer"
-                          />
-                        </TooltipTrigger>
-                        <TooltipContent hideWhenDetached>
-                          {linkClicked ? <p>Copied!</p> : <p> Copy link</p>}
-                        </TooltipContent>
-                      </Tooltip>
-                    </TooltipProvider>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </Link>
-          </h2>
-          {text ? (
-            <RenderText
-              className="mt-2 text-sm break-all overflow-hidden whitespace-normal"
-              text={text}
-              limit={500}
-            />
-          ) : null}
+        <article className="ml-11">
+          <PostCardH2 title={title} url={url} />
+          <RenderText
+            className="mt-2 text-sm break-all overflow-hidden whitespace-normal text-muted-foreground"
+            text={text}
+            limit={500}
+          />
         </article>
 
-        <div className="flex flex-col gap-1">
-          <div className="flex ml-9">
-            <Comment descendants={descendants} />
-            <UpvoteSection score={score} view="mobile" />
-          </div>
+        {/* Since job type doesn't have any comments related */}
+        {type !== "job" && (
+          <div className="flex flex-col gap-1 mt-2">
+            <div className="flex ml-9">
+              <Comment descendants={descendants} />
+              <UpvoteSection score={score} view="mobile" />
+            </div>
 
-          {/* Comments section */}
-          <Comments descendants={descendants} kids={kids} />
-        </div>
+            {/* Comments section */}
+            <Comments descendants={descendants} kids={kids} />
+          </div>
+        )}
       </div>
 
       {/* Upvote section */}
-      <UpvoteSection score={score} view="desktop" />
+      {type !== "job" && <UpvoteSection score={score} view="desktop" />}
     </div>
-  );
-};
-
-type CommentProps = {
-  descendants?: number;
-};
-const Comment = ({ descendants }: CommentProps) => {
-  return (
-    <div className="w-fit flex items-center justify-center gap-1  cursor-pointer hover:bg-muted hover:text-primary rounded-md px-2 py-1">
-      <MessageCircle size={17} />
-      <p className="text-xs">{descendants}</p>
-    </div>
-  );
-};
-
-type UpvoteSectionProps = {
-  score?: number;
-  view?: "desktop" | "mobile";
-};
-
-const UpvoteSection = ({ score = 0, view = "desktop" }: UpvoteSectionProps) => {
-  const [upVoteClicked, setUpVoteClicked] = useState(false);
-
-  const handleUpvoteClick = () => {
-    setUpVoteClicked((prev) => !prev);
-  };
-
-  const UpvoteContent = ({ className }: { className: string }) => (
-    <div className={className} onClick={handleUpvoteClick}>
-      <Triangle fill={upVoteClicked ? "#ff6600" : "transparent"} size={17} />
-      <p className="text-xs">{upVoteClicked ? score + 1 : score}</p>
-    </div>
-  );
-
-  return (
-    <>
-      {view === "desktop" ? (
-        // {/* Desktop view */}
-        <UpvoteContent className="hidden sm:flex flex-col cursor-pointer items-center justify-center gap-1 hover:bg-secondary border-foreground rounded-md px-4 py-1" />
-      ) : (
-        // {/* Mobile view */}
-        <UpvoteContent className="flex sm:hidden w-fit cursor-pointer items-center justify-center gap-1 rounded-md px-4 py-1 text-blue" />
-      )}
-    </>
   );
 };

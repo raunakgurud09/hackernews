@@ -5,6 +5,11 @@ import { RenderText } from "./RenderText";
 import TimeDisplay from "./TimeDisplay";
 import { CommentSkeleton } from "../Comments/SingleComment";
 import { ProfileView } from "./ProfileView";
+import clsx from "clsx";
+import { CapitalizeFirstLetter } from "@/utils/string";
+import { Separator } from "./Separator";
+
+export type TPostTypesEnum = "story" | "comment" | "job" | "poll" | "pollopt";
 
 type TComment = {
   id?: number;
@@ -12,16 +17,18 @@ type TComment = {
   text?: string;
   parent?: number;
   time?: number;
-  type?: "comment";
+  type?: TPostTypesEnum;
   kids?: number[];
 };
 
 export const Comments = ({
   descendants = 0,
   kids = [],
+  type,
 }: {
   descendants?: number;
   kids?: number[];
+  type?: TPostTypesEnum;
 }) => {
   const [loadedComments, setLoadedComments] = useState<TComment[]>([]);
   const [loading, setLoading] = useState(false);
@@ -77,20 +84,19 @@ export const Comments = ({
   const toggleCommentsVisibility = () => {
     if (!commentsVisible) loadInitialComments();
     setCommentsVisible((prev) => !prev);
-    console.log(descendants);
   };
 
   return (
     <div className="ml-9 mt-1">
       <div className="flex gap-2">
-        <div>
-          <span
-            onClick={toggleCommentsVisibility}
-            className="ml-2 text-xxs cursor-pointer hover:underline"
-          >
-            {commentsVisible ? "Hide Comments" : "Show Comments"}
-          </span>
-        </div>
+        <span
+          onClick={toggleCommentsVisibility}
+          className={clsx("ml-2 text-xxs cursor-pointer hover:underline", {
+            "text-disabled": descendants <= 0,
+          })}
+        >
+          {commentsVisible ? "Hide Comments" : "Show Comments"}
+        </span>
       </div>
 
       {commentsVisible && (
@@ -99,11 +105,13 @@ export const Comments = ({
             ? loadedComments.map((comment: TComment) => (
                 <div key={comment.id} className="p-2 flex gap-2 w-full">
                   <ProfileView by={comment.by} size={28} />
+                  {type}
                   <div className="w-full">
-                    <div className="font-medium flex gap-2 mb-1">
+                    <div className="flex items-center font-medium gap-1 mb-1">
                       <p className="text-sm font-medium">
-                        {comment.by ?? "Anonymous"}
+                        {CapitalizeFirstLetter(comment.by)}
                       </p>
+                      <Separator />
                       <TimeDisplay
                         className="text-xxs font-normal"
                         time={comment.time}
@@ -111,9 +119,10 @@ export const Comments = ({
                     </div>
 
                     <RenderText
-                      className="text-xs break-all overflow-hidden whitespace-normal"
+                      className="text-xs break-all overflow-hidden whitespace-normal text-muted-foreground"
                       text={comment.text ?? "No content"}
                     />
+
                     {comment.kids && comment.kids.length > 0 && (
                       <p className="text-xxs underline mt-2 cursor-pointer">
                         comments . {comment.kids.length}

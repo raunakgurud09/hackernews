@@ -8,6 +8,13 @@ import {
 } from "@/components/ui/hover-card";
 // import { sleep } from "@/lib/utils";
 import { Avatar } from "./Avatar";
+import { Button } from "../ui/button";
+import { CalendarDays } from "lucide-react";
+import dayjs from "dayjs";
+import { CapitalizeFirstLetter, createHNUserPageUrl } from "@/utils/string";
+import Link from "next/link";
+import { RenderText } from "./RenderText";
+import { Skeleton } from "../ui/skeleton";
 
 type ProfileViewProps = {
   by: string | undefined;
@@ -53,19 +60,37 @@ export const ProfileView = ({ by, size = 36 }: ProfileViewProps) => {
       <HoverCardTrigger onMouseEnter={fetchUserData}>
         <Avatar by={by} size={size} />
       </HoverCardTrigger>
-      <HoverCardContent>
+      <HoverCardContent className="w-96">
         {loading ? (
           <ProfilePreviewSkeleton />
         ) : error ? (
           <div>Error loading user data</div>
         ) : userData ? (
-          <div>
-            <Avatar by={userData?.id} size={size} />
-            <div>
-              <div>{userData.id}</div>
-              Created: {new Date(userData.created * 1000).toLocaleDateString()}
+          <div className="">
+            <div className=" flex gap-2 items-start justify-between">
+              <Avatar by={userData?.id} size={60} />
+              <Button variant="outline" size="icon" className="text-xs">
+                {userData.karma}
+              </Button>
             </div>
-            <div>Karma: {userData.karma}</div>
+            <div>
+              <Link target="_blank" href={createHNUserPageUrl(userData.id)}>
+                <p className="text-lg font-medium mt-2 mb-2 hover:underline cursor-pointer">
+                  {CapitalizeFirstLetter(userData.id)}
+                </p>
+              </Link>
+              <div className="flex gap-1 items-center mb-1">
+                <CalendarDays size={12} />
+                <p className="text-xs">
+                  Joined {dayjs.unix(userData.created).format("MMMM YYYY")}
+                </p>
+              </div>
+              <RenderText
+                text={userData?.about}
+                className="text-xxs"
+                limit={200}
+              />
+            </div>
           </div>
         ) : (
           <div>Hover to load user data</div>
@@ -76,5 +101,23 @@ export const ProfileView = ({ by, size = 36 }: ProfileViewProps) => {
 };
 
 const ProfilePreviewSkeleton = () => {
-  return <div className=""></div>;
+  return (
+    <div className="">
+      <div className=" flex gap-2 items-start justify-between">
+        <Skeleton className="w-16 h-16 rounded-full" />
+        <Skeleton className="w-9 h-9" />
+      </div>
+      <div>
+        <Skeleton className="w-[40%] h-4 text-lg font-medium mt-2 mb-2 " />
+        <Skeleton className="w-[60%] h-3 mb-2" />
+        <div className="flex flex-col gap-1">
+          <Skeleton className="w-[20%] h-2 text-sm font-medium" />
+          <Skeleton className="w-[80%] h-2 text-sm font-medium" />
+          <Skeleton className="w-full h-2 text-sm font-medium" />
+          <Skeleton className="w-full h-2 text-sm font-medium" />
+          <Skeleton className="w-[30%] h-2 text-sm font-medium" />
+        </div>
+      </div>
+    </div>
+  );
 };
