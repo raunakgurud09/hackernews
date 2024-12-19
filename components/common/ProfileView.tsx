@@ -8,8 +8,6 @@ import {
 } from "@/components/ui/hover-card";
 // import { sleep } from "@/lib/utils";
 import { Avatar } from "./Avatar";
-import Image from "next/image";
-import { getAvatarIdFromUserName } from "@/utils/string";
 
 type ProfileViewProps = {
   by: string | undefined;
