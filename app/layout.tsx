@@ -34,7 +34,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${poppins.variable} ${geistMono.variable} antialiased `}
+        className={`${poppins.variable} ${geistMono.variable} antialiased max-h-screen overflow-hidden`}
       >
         <ThemeProvider
           attribute="class"
@@ -43,7 +43,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <div className="w-full border border-b sticky top-0 bg-background py-4">
-            <div className="container max-w-[960px] mx-auto h-full flex items-center justify-between">
+            <div className="container max-w-[960px] mx-auto flex items-center justify-between">
               <div className="flex text-2xl font-mono font-medium items-center gap-1">
                 <div className="h-9 w-9 rounded-lg bg-primary flex items-center justify-center">
                   <span className="font-bold text-white text-xl font-mono">

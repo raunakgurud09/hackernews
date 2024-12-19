@@ -1,13 +1,21 @@
 import { getRelativeTime } from "@/lib/dayjs";
+import { cn } from "@/lib/utils";
 import React from "react";
 
 type TimeDisplayProps = {
-  time: number; // Unix timestamp in seconds
+  time: number | undefined; // Unix timestamp in seconds
+  className?: string;
 };
 
-const TimeDisplay: React.FC<TimeDisplayProps> = ({ time }) => {
+const TimeDisplay: React.FC<TimeDisplayProps> = ({ time, className = "" }) => {
   return (
-    <p className="text-sm text-muted-foreground">{getRelativeTime(time)} Ago</p>
+    <>
+      {time ? (
+        <p className={cn("text-sm text-muted-foreground mt-1", className)}>
+          {getRelativeTime(time)} ago
+        </p>
+      ) : null}
+    </>
   );
 };
 
