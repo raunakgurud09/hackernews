@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import DOMPurify from "dompurify";
 
 type RenderTextProps = {
-  text: string;
+  text: string | undefined;
   className?: string;
   limit?: number;
 };
@@ -16,8 +16,11 @@ export const RenderText = ({
 }: RenderTextProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
+  if (!text) return null;
   // Sanitize the input to prevent XSS attacks
   const sanitizedText = DOMPurify.sanitize(text);
+
+  console.log(DOMPurify);
 
   const displayedText = isExpanded
     ? sanitizedText
@@ -28,7 +31,7 @@ export const RenderText = ({
   return (
     <div className={className}>
       <div
-        className="break-all overflow-hidden whitespace-normal"
+        className="break-words overflow-hidden whitespace-normal"
         dangerouslySetInnerHTML={{ __html: displayedText }}
       />
       {text.length > limit && (

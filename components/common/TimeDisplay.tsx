@@ -11,7 +11,7 @@ const TimeDisplay: React.FC<TimeDisplayProps> = ({ time, className = "" }) => {
   return (
     <>
       {time ? (
-        <p className={cn("text-sm text-muted-foreground mt-1", className)}>
+        <p className={cn("text-sm text-muted-foreground", className)}>
           {getRelativeTime(time)} ago
         </p>
       ) : null}
