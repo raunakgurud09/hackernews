@@ -75,11 +75,7 @@ export const PostCard = ({
               setShowLink(false);
             }}
           >
-            <Link
-              color={linkClicked ? "#FF6600" : "card-foreground"}
-              target="_blank"
-              href={url ?? ""}
-            >
+            <Link target="_blank" href={url ?? ""}>
               {title}{" "}
               <AnimatePresence>
                 {showLink && (
@@ -102,8 +98,8 @@ export const PostCard = ({
                       <Tooltip>
                         <TooltipTrigger>
                           <LinkIcon
-                            size={16}
-                            color={linkClicked ? "#FF6600" : "#000"}
+                            size={12}
+                            // color={linkClicked ? "#FF6600" : "#000"}
                             onClick={(e) => {
                               e.preventDefault();
                               handleLinkClicked();
@@ -173,12 +169,7 @@ const UpvoteSection = ({ score = 0, view = "desktop" }: UpvoteSectionProps) => {
 
   const UpvoteContent = ({ className }: { className: string }) => (
     <div className={className} onClick={handleUpvoteClick}>
-      <Triangle
-        fill={upVoteClicked ? "#ff6600" : "transparent"}
-        stroke={upVoteClicked ? "#FF6600" : "#000"}
-        className=""
-        size={17}
-      />
+      <Triangle fill={upVoteClicked ? "#ff6600" : "transparent"} size={17} />
       <p className="text-xs">{upVoteClicked ? score + 1 : score}</p>
     </div>
   );
@@ -187,10 +178,10 @@ const UpvoteSection = ({ score = 0, view = "desktop" }: UpvoteSectionProps) => {
     <>
       {view === "desktop" ? (
         // {/* Desktop view */}
-        <UpvoteContent className="hidden sm:flex flex-col cursor-pointer items-center justify-center gap-1 bg-secondary border-foreground rounded-md px-4 py-1" />
+        <UpvoteContent className="hidden sm:flex flex-col cursor-pointer items-center justify-center gap-1 hover:bg-secondary border-foreground rounded-md px-4 py-1" />
       ) : (
         // {/* Mobile view */}
-        <UpvoteContent className="flex sm:hidden w-fit cursor-pointer items-center justify-center gap-1 rounded-md px-4 py-1" />
+        <UpvoteContent className="flex sm:hidden w-fit cursor-pointer items-center justify-center gap-1 rounded-md px-4 py-1 text-blue" />
       )}
     </>
   );

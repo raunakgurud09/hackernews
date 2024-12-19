@@ -8,6 +8,8 @@ import {
 } from "@/components/ui/hover-card";
 // import { sleep } from "@/lib/utils";
 import { Avatar } from "./Avatar";
+import Image from "next/image";
+import { getAvatarIdFromUserName } from "@/utils/string";
 
 type ProfileViewProps = {
   by: string | undefined;
@@ -51,22 +53,18 @@ export const ProfileView = ({ by, size = 36 }: ProfileViewProps) => {
   return (
     <HoverCard>
       <HoverCardTrigger onMouseEnter={fetchUserData}>
-        <div
-          className="bg-foreground  rounded-full cursor-pointer"
-          style={{ width: `${size}px`, height: `${size}px` }}
-        ></div>
+        <Avatar by={by} size={size} />
       </HoverCardTrigger>
       <HoverCardContent>
         {loading ? (
-          <div>Loading...</div>
+          <ProfilePreviewSkeleton />
         ) : error ? (
           <div>Error loading user data</div>
         ) : userData ? (
           <div>
+            <Avatar by={userData?.id} size={size} />
             <div>
-              <Avatar />
-            </div>
-            <div>
+              <div>{userData.id}</div>
               Created: {new Date(userData.created * 1000).toLocaleDateString()}
             </div>
             <div>Karma: {userData.karma}</div>
@@ -77,4 +75,8 @@ export const ProfileView = ({ by, size = 36 }: ProfileViewProps) => {
       </HoverCardContent>
     </HoverCard>
   );
+};
+
+const ProfilePreviewSkeleton = () => {
+  return <div className=""></div>;
 };

@@ -17,7 +17,7 @@ export const PaginationComponent = ({
   page: number;
 }) => {
   return (
-    <div className="mt-20">
+    <div className="my-10">
       <Pagination>
         <PaginationContent>
           <PaginationItem>

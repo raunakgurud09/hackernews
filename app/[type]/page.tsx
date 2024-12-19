@@ -27,7 +27,6 @@ export default async function Page({
   const apiUrl = apiEndpoints[type] || apiEndpoints["new"];
 
   const storyIds = await fetch(apiUrl, {
-    cache: "no-store",
     next: { revalidate: 300 },
   }).then((res) => res.json());
 
@@ -39,7 +38,7 @@ export default async function Page({
     storyIds.slice(start, end).map(async (id: number) => {
       const post = await fetch(
         `https://hacker-news.firebaseio.com/v0/item/${id}.json?print=pretty`,
-        { cache: "force-cache", next: { revalidate: 300 } }
+        { next: { revalidate: 300 } }
       )
         .then((res) => res.json())
         .then((r) => {
@@ -52,11 +51,12 @@ export default async function Page({
   );
 
   return (
-    <main className="w-full overflow-y-auto max-h-[calc(100vh-70px)]">
-      <h1 className="font-bold text-3xl p-3 md:p-6">
+    <main className="w-full overflow-y-auto max-h-[calc(100vh-70px)] border-r">
+      {/* <h1 className="font-bold text-3xl p-3 md:p-6">
         {type.charAt(0).toUpperCase() + type.slice(1)} stories
       </h1>
-      <div className="flex flex-col  ">
+       */}
+      <div className="flex flex-col ">
         {posts.map((post, idx) => {
           return <PostCard {...post} key={idx} />;
         })}
