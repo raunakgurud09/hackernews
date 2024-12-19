@@ -77,9 +77,9 @@ export const Comments = ({
   const toggleCommentsVisibility = () => {
     if (!commentsVisible) loadInitialComments();
     setCommentsVisible((prev) => !prev);
+    console.log(descendants);
   };
 
-  console.log(descendants);
   return (
     <div className="ml-9 mt-1">
       <div className="flex gap-2">
@@ -111,7 +111,7 @@ export const Comments = ({
                     </div>
 
                     <RenderText
-                      className="text-xs"
+                      className="text-xs break-all overflow-hidden whitespace-normal"
                       text={comment.text ?? "No content"}
                     />
                     {comment.kids && comment.kids.length > 0 && (

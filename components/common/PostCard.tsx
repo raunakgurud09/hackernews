@@ -23,6 +23,7 @@ type PostCardProps = {
 import TimeDisplay from "./TimeDisplay";
 import { ProfileView } from "./ProfileView";
 import { Comments } from "./Comments";
+import { RenderText } from "./RenderText";
 
 export const PostCard = ({
   by,
@@ -121,7 +122,11 @@ export const PostCard = ({
             </Link>
           </h2>
           {text ? (
-            <p className="mt-2 text-xs">{text?.slice(0, 200) + "..."}</p>
+            <RenderText
+              className="mt-2 text-sm break-all overflow-hidden whitespace-normal"
+              text={text}
+              limit={500}
+            />
           ) : null}
         </article>
 
