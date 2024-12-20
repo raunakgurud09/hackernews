@@ -99,14 +99,16 @@ export const Comments = ({
   return (
     <div className="ml-9 mt-1">
       <div className="flex gap-2">
-        <span
-          onClick={toggleCommentsVisibility}
-          className={clsx("ml-2 text-xxs cursor-pointer hover:underline", {
-            "text-disabled": descendants <= 0,
-          })}
-        >
-          {commentsVisible ? "Hide Comments" : "Show Comments"}
-        </span>
+        {(descendants > 0 || kids.length > 0) && (
+          <span
+            onClick={toggleCommentsVisibility}
+            className={clsx("ml-2 text-xxs cursor-pointer hover:underline", {
+              "text-disabled": descendants <= 0,
+            })}
+          >
+            {commentsVisible ? "Hide Comments" : "Show Comments"}
+          </span>
+        )}
       </div>
 
       {commentsVisible && (

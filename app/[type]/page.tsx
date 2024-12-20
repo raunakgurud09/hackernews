@@ -20,7 +20,6 @@ export default async function Page({
 
   if (id) {
     const post = await fetchPost(+id);
-    console.log(post);
     return (
       <main className="w-full overflow-y-auto max-h-[calc(100vh-70px)] border-r">
         <div className="flex flex-col">

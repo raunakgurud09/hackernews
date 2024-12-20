@@ -40,7 +40,7 @@ export const CommentSection = ({
           onClick={() => setShowTextarea((prev) => !prev)}
           className="cursor-pointer"
         >
-          <Comment descendants={descendants} />
+          <Comment descendants={descendants} kids={kids} />
         </div>
         <UpvoteSection score={score} view="mobile" />
       </div>
