@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import DOMPurify from "dompurify";
+import DOMPurify from "isomorphic-dompurify";
 
 type RenderTextProps = {
   text: string | undefined;
