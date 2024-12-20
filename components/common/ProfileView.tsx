@@ -68,7 +68,7 @@ export const ProfileView = ({ by, size = 36 }: ProfileViewProps) => {
         ) : userData ? (
           <div className="">
             <div className=" flex gap-2 items-start justify-between">
-              <Avatar by={userData?.id} size={60} />
+              <Avatar by={userData?.id} size={60} karma={userData.karma} />
               <Button variant="outline" size="icon" className="text-xs">
                 {userData.karma}
               </Button>

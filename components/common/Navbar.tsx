@@ -17,9 +17,7 @@ export const Navbar = () => {
         </div>
         <div className="flex gap-4 items-center">
           <ThemeToggle />
-          <Button variant="outline" size="icon">
-            1
-          </Button>
+          <KarmaPoints points={1} />
           <div className="h-9 w-9 bg-foreground rounded-full"></div>
         </div>
       </div>
@@ -39,5 +37,13 @@ export const Logo = () => {
         News
       </h1>
     </div>
+  );
+};
+
+export const KarmaPoints = ({ points = 0 }) => {
+  return (
+    <Button variant="outline" size="icon">
+      {points} LVL
+    </Button>
   );
 };
