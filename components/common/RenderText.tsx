@@ -20,8 +20,6 @@ export const RenderText = ({
   // Sanitize the input to prevent XSS attacks
   const sanitizedText = DOMPurify.sanitize(text);
 
-  console.log(DOMPurify);
-
   const displayedText = isExpanded
     ? sanitizedText
     : DOMPurify.sanitize(text.slice(0, limit) || "");

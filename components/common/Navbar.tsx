@@ -1,12 +1,13 @@
 import React from "react";
 import { ThemeToggle } from "../ThemeToggle";
 import { Button } from "../ui/button";
+import { SideDrawer } from "./SideDrawer";
 
 export const Navbar = () => {
   return (
     <div className="w-full border border-b sticky top-0 bg-background py-4">
       <div className="container max-w-[960px] px-3 mx-auto flex items-center justify-between">
-        <Logo />
+        <SideDrawer />
         <div className="flex gap-4 items-center">
           <ThemeToggle />
           <Button variant="outline" size="icon">
@@ -19,7 +20,7 @@ export const Navbar = () => {
   );
 };
 
-const Logo = () => {
+export const Logo = () => {
   return (
     <div className="flex text-2xl font-mono font-medium items-center gap-1">
       <div className="h-9 w-9 rounded-lg bg-primary flex items-center justify-center">

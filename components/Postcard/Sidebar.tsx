@@ -1,38 +1,21 @@
-"use client"; // Only if using client-side navigation (optional)
+"use client";
 
 import { usePathname } from "next/navigation";
 import { Button } from "../ui/button";
-import {
-  BadgePlus,
-  BriefcaseBusiness,
-  CircleHelp,
-  Mountain,
-  Sparkles,
-  TrendingUp,
-} from "lucide-react";
+
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { Sidebar_options } from "@/utils/common";
 
-export default function Navbar() {
-  const pathname = usePathname(); // Get the current path for active link styling
-
-  const links = [
-    { name: "top", icon: <Mountain /> },
-    { name: "new", icon: <BadgePlus /> },
-    { name: "best", icon: <TrendingUp /> },
-    { name: "job", icon: <BriefcaseBusiness /> },
-    { name: "ask", icon: <CircleHelp /> },
-    { name: "show", icon: <Sparkles /> },
-    // { name: "submit", icon: <Send />, beta: true },
-    // { name: "bookmark", icon: <Bookmark />, beta: true },
-  ];
+export default function SideBar() {
+  const pathname = usePathname();
 
   return (
     <nav className="hidden md:flex xl:w-[200px] border-r flex-col items-center gap-4 min-h-[calc(100vh-70px)] p-3">
       <div
         className={cn("flex flex-col items-center justify-center w-full gap-3")}
       >
-        {links.map((link) => (
+        {Sidebar_options.map((link) => (
           <Link
             className={cn("py-1 w-full flex items-center justify-start gap-2", {
               "cursor-none": false,

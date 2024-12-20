@@ -1,5 +1,6 @@
 import { PaginationComponent } from "@/components/common/Pagination";
 import { PostCard } from "@/components/common/PostCard";
+import { apiEndpoints } from "@/utils/constants";
 import React from "react";
 
 type tParams = Promise<{ type: string }>;
@@ -23,18 +24,10 @@ const fetchPosts = async (storyIds: number[], start: number, end: number) => {
       }
     })
   );
-  return posts.filter(Boolean); // Filter out null posts
+  return posts.filter(Boolean);
 };
 
 const getStoryIds = async (type: string) => {
-  const apiEndpoints: Record<string, string> = {
-    top: "https://hacker-news.firebaseio.com/v0/topstories.json",
-    new: "https://hacker-news.firebaseio.com/v0/newstories.json",
-    best: "https://hacker-news.firebaseio.com/v0/beststories.json",
-    job: "https://hacker-news.firebaseio.com/v0/jobstories.json",
-    show: "https://hacker-news.firebaseio.com/v0/showstories.json",
-    ask: "https://hacker-news.firebaseio.com/v0/askstories.json",
-  };
   const apiUrl = apiEndpoints[type] || apiEndpoints["new"];
   try {
     const response = await fetch(apiUrl, { next: { revalidate: 300 } });
@@ -61,7 +54,6 @@ export default async function Page({
   // use { page } here and also manage type on the page
   const { page } = (await searchParams) || 1;
 
-  console.log(page);
   const storyIds = await getStoryIds(type);
   const totalPages = Math.ceil(storyIds.length / itemsPerPage);
 
@@ -74,7 +66,6 @@ export default async function Page({
     <main className="w-full overflow-y-auto max-h-[calc(100vh-70px)] border-r">
       <div className="flex flex-col ">
         {posts.map((post, idx) => {
-          console.log(post);
           return <PostCard {...post} key={idx} />;
         })}
       </div>
