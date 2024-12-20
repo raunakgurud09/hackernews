@@ -1,5 +1,5 @@
 import { PaginationComponent } from "@/components/common/Pagination";
-import { PostCard } from "@/components/common/PostCard";
+import { PostCard } from "@/components/Postcard/PostCard";
 import { apiEndpoints } from "@/utils/constants";
 import React from "react";
 
