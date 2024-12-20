@@ -24,6 +24,8 @@ export const PostCardH2 = ({ title, url }: PostCardH2Props) => {
     }, 2000);
   };
 
+  if (!title) return null;
+
   return (
     <h2
       className="w-full text-base hover:text-primary animate-in transition-all flex items-center gap-2"

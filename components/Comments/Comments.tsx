@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TimeDisplay from "../common/TimeDisplay";
 import { CommentSkeleton } from "../Comments/SingleComment";
 import { ProfileView } from "../common/ProfileView";
@@ -8,6 +8,8 @@ import clsx from "clsx";
 import { CapitalizeFirstLetter } from "@/utils/string";
 import { Separator } from "../common/Separator";
 import { RenderText } from "../common/RenderText";
+import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 export type TPostTypesEnum = "story" | "comment" | "job" | "poll" | "pollopt";
 
@@ -25,15 +27,17 @@ export const Comments = ({
   descendants = 0,
   kids = [],
   type,
+  defaultVisible = false,
 }: {
   descendants?: number;
   kids?: number[];
   type?: TPostTypesEnum;
+  defaultVisible: boolean;
 }) => {
   const [loadedComments, setLoadedComments] = useState<TComment[]>([]);
   const [loading, setLoading] = useState(false);
   const [visibleCount] = useState(3);
-  const [commentsVisible, setCommentsVisible] = useState(false);
+  const [commentsVisible, setCommentsVisible] = useState(defaultVisible);
 
   const loadInitialComments = async () => {
     if (loadedComments.length > 0 || loading) return;
@@ -86,6 +90,12 @@ export const Comments = ({
     setCommentsVisible((prev) => !prev);
   };
 
+  useEffect(() => {
+    if (commentsVisible) {
+      loadInitialComments();
+    }
+  }, []);
+
   return (
     <div className="ml-9 mt-1">
       <div className="flex gap-2">
@@ -124,16 +134,20 @@ export const Comments = ({
                     />
 
                     {comment.kids && comment.kids.length > 0 && (
-                      <p className="text-xxs underline mt-2 cursor-pointer">
-                        comments . {comment.kids.length}
-                      </p>
+                      <Link
+                        href={`/comment?id=${comment.id}`}
+                        className="text-xxs mt-2 cursor-pointer flex items-center gap-[2px] hover:gap-[6px] transition-all hover:underline"
+                      >
+                        <span>View all {comment.kids.length} comments</span>
+                        <ArrowRight width={10} height={10} />
+                      </Link>
                     )}
                   </div>
                 </div>
               ))
             : !loading &&
               kids.length > 0 && (
-                <p className="italic">Loading initial comments...</p>
+                <p className="italic text-xxs">Loading initial comments...</p>
               )}
 
           {loading && <CommentsLoading />}

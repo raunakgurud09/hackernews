@@ -11,6 +11,7 @@ type PostCardProps = {
   type?: "story" | "comment" | "job" | "poll" | "pollopt";
   descendants?: number;
   kids?: number[];
+  defaultVisible?: boolean;
 };
 
 import { RenderText } from "../common/RenderText";
@@ -30,12 +31,12 @@ export const PostCard = ({
   descendants = 0,
   kids,
   type,
+  defaultVisible = false,
 }: PostCardProps) => {
   return (
     <div className="flex w-full justify-between items-start border-b p-3 md:p-6">
       <div className="flex flex-col gap-2 w-full sm:w-[90%]">
         <PostcardHeader by={by} id={id} type={type} time={time} />
-
         <article className="ml-11">
           <PostCardH2 title={title} url={url} />
           <RenderText
@@ -47,7 +48,12 @@ export const PostCard = ({
 
         {/* Since job type doesn't have any comments related */}
         {type !== "job" && (
-          <CommentSection descendants={descendants} score={score} kids={kids} />
+          <CommentSection
+            descendants={descendants}
+            score={score}
+            kids={kids}
+            defaultVisible={defaultVisible}
+          />
         )}
       </div>
 

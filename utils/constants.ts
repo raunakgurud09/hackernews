@@ -18,4 +18,5 @@ export const apiEndpoints: Record<string, string> = {
   job: "https://hacker-news.firebaseio.com/v0/jobstories.json",
   show: "https://hacker-news.firebaseio.com/v0/showstories.json",
   ask: "https://hacker-news.firebaseio.com/v0/askstories.json",
+  comment: "https://hacker-news.firebaseio.com/v0/item/",
 };

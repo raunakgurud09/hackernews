@@ -12,12 +12,14 @@ interface CommentSectionProps {
   descendants: number;
   score: number;
   kids?: number[];
+  defaultVisible?: boolean;
 }
 
 export const CommentSection = ({
   descendants,
   score,
   kids,
+  defaultVisible = false,
 }: CommentSectionProps) => {
   const [showTextarea, setShowTextarea] = useState(false);
   const [comment, setComment] = useState("");
@@ -73,7 +75,13 @@ export const CommentSection = ({
       )}
 
       {/* Comments section */}
-      {descendants > 0 && <Comments descendants={descendants} kids={kids} />}
+      {
+        <Comments
+          descendants={descendants}
+          kids={kids}
+          defaultVisible={defaultVisible}
+        />
+      }
     </div>
   );
 };

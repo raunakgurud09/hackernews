@@ -21,7 +21,7 @@ export const PaginationComponent = ({
   const currentPage = Number(page);
 
   const getPageNumbers = () => {
-    const delta = 2;
+    const delta = 1;
     const range = [];
     const rangeWithDots = [];
 

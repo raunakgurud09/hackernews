@@ -25,6 +25,29 @@ export const fetchPosts = async (
   return posts.filter(Boolean);
 };
 
+export const fetchPost = async (postId: number) => {
+  try {
+    const response = await fetch(
+      `https://hacker-news.firebaseio.com/v0/item/${postId}.json?print=pretty`,
+      {
+        next: { revalidate: 300 },
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(
+        `Failed to fetch post with ID ${postId}: ${response.statusText}`
+      );
+    }
+
+    const post = await response.json();
+    return post || null;
+  } catch (error) {
+    console.error(`Failed to fetch post with ID ${postId}:`, error);
+    return null;
+  }
+};
+
 export const getStoryIds = async (type: string) => {
   const apiUrl = apiEndpoints[type] || apiEndpoints["new"];
   try {
