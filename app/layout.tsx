@@ -3,7 +3,6 @@ import { Geist_Mono, Poppins } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Navbar } from "@/components/common/Navbar";
-import ProgressBar from "@/components/Progress/Progress";
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
@@ -37,7 +36,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <ProgressBar />
+          {/* <ProgressBar /> */}
           <Navbar />
           {children}
         </ThemeProvider>
