@@ -8,8 +8,9 @@ import clsx from "clsx";
 import { CapitalizeFirstLetter } from "@/utils/string";
 import { Separator } from "../common/Separator";
 import { RenderText } from "../common/RenderText";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ChevronsUp } from "lucide-react";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
 
 export type TPostTypesEnum = "story" | "comment" | "job" | "poll" | "pollopt";
 
@@ -100,14 +101,27 @@ export const Comments = ({
     <div className="ml-9 mt-1">
       <div className="flex gap-2">
         {(descendants > 0 || kids.length > 0) && (
-          <span
+          <div
             onClick={toggleCommentsVisibility}
-            className={clsx("ml-2 text-xxs cursor-pointer hover:underline", {
-              "text-disabled": descendants <= 0,
-            })}
+            className={clsx(
+              "ml-2 text-xxs cursor-pointer hover:underline flex items-center gap-[2px] transition-all",
+              {
+                "text-disabled": descendants <= 0,
+              }
+            )}
           >
-            {commentsVisible ? "Hide Comments" : "Show Comments"}
-          </span>
+            <span className="">
+              {commentsVisible ? "Hide Comments" : "Show Comments"}
+            </span>
+            <ChevronsUp
+              width={12}
+              height={12}
+              className={cn("transition-all", {
+                "rotate-0": commentsVisible,
+                "rotate-180": !commentsVisible,
+              })}
+            />
+          </div>
         )}
       </div>
 
@@ -116,8 +130,9 @@ export const Comments = ({
           {loadedComments.length > 0
             ? loadedComments.map((comment: TComment) => (
                 <div key={comment.id} className="p-2 flex gap-2 w-full">
-                  <ProfileView by={comment.by} size={28} />
-                  {type}
+                  <div>
+                    <ProfileView by={comment.by} size={28} /> {type}
+                  </div>
                   <div className="w-full">
                     <div className="flex items-center font-medium gap-1 mb-1">
                       <p className="text-sm font-medium">
