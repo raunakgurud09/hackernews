@@ -2,8 +2,8 @@ import { PaginationComponent } from "@/components/common/Pagination";
 import { PostCard } from "@/components/common/PostCard";
 import React from "react";
 
-type tParams = { type: string };
-type tSearchParams = { page: string };
+type tParams = Promise<{ type: string }>;
+type tSearchParams = Promise<{ page: string }>;
 
 const fetchPosts = async (storyIds: number[], start: number, end: number) => {
   const posts = await Promise.all(
@@ -57,7 +57,9 @@ export default async function Page({
 }) {
   const itemsPerPage = 20;
   const { type } = await params;
-  const { page } = (await searchParams) || { page: "1" };
+  // TODO: fix this error in console
+  // use { page } here and also manage type on the page
+  const { page } = (await searchParams) || 1;
 
   console.log(page);
   const storyIds = await getStoryIds(type);
