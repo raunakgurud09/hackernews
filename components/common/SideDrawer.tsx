@@ -1,6 +1,7 @@
 import React from "react";
 import {
   Sheet,
+  SheetClose,
   SheetContent,
   SheetDescription,
   SheetHeader,
@@ -26,28 +27,29 @@ export const SideDrawer = () => {
           <SheetTitle></SheetTitle>
           <SheetDescription style={{ marginTop: "40px" }}>
             {Sidebar_options.map((link) => (
-              <Link
-                className={cn(
-                  "py-1 w-full flex items-center justify-start gap-2",
-                  {
-                    "cursor-none": false,
-                  }
-                )}
-                key={link.name}
-                href={`/${link.name}?page=1`}
-              >
-                <Button
-                  className="py-1 w-full flex items-center justify-start gap-2 relative"
-                  variant={"outline"}
+              <SheetClose key={link.name} asChild>
+                <Link
+                  className={cn(
+                    "py-1 w-full flex items-center justify-start gap-2",
+                    {
+                      "cursor-none": false,
+                    }
+                  )}
+                  href={`/${link.name}?page=1`}
                 >
-                  <span>{link.icon}</span>
-                  <p className="">
-                    {link.name &&
-                      link?.name.charAt(0)?.toLocaleUpperCase() +
-                        link.name.slice(1)}
-                  </p>
-                </Button>
-              </Link>
+                  <Button
+                    className="py-1 w-full flex items-center justify-start gap-2 relative"
+                    variant={"outline"}
+                  >
+                    <span>{link.icon}</span>
+                    <p className="">
+                      {link.name &&
+                        link?.name.charAt(0)?.toLocaleUpperCase() +
+                          link.name.slice(1)}
+                    </p>
+                  </Button>
+                </Link>
+              </SheetClose>
             ))}
           </SheetDescription>
         </SheetHeader>
