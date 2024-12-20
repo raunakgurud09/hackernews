@@ -1,13 +1,13 @@
 "use client";
 
 import React, { useState } from "react";
-import { RenderText } from "./RenderText";
-import TimeDisplay from "./TimeDisplay";
+import TimeDisplay from "../common/TimeDisplay";
 import { CommentSkeleton } from "../Comments/SingleComment";
-import { ProfileView } from "./ProfileView";
+import { ProfileView } from "../common/ProfileView";
 import clsx from "clsx";
 import { CapitalizeFirstLetter } from "@/utils/string";
-import { Separator } from "./Separator";
+import { Separator } from "../common/Separator";
+import { RenderText } from "../common/RenderText";
 
 export type TPostTypesEnum = "story" | "comment" | "job" | "poll" | "pollopt";
 

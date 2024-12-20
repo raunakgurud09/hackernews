@@ -8,10 +8,10 @@ export const Navbar = () => {
     <div className="w-full border border-b sticky top-0 bg-background py-4">
       <div className="container max-w-[960px] px-3 mx-auto flex items-center justify-between">
         <div>
-          <div className="hidden sm:flex">
+          <div className="hidden md:flex">
             <Logo />
           </div>
-          <div className="flex sm:hidden cursor-pointer">
+          <div className="flex md:hidden cursor-pointer">
             <SideDrawer />
           </div>
         </div>

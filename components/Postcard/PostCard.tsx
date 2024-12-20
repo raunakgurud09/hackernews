@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 
 type PostCardProps = {
@@ -15,12 +13,11 @@ type PostCardProps = {
   kids?: number[];
 };
 
-import { Comments } from "./Comments";
-import { RenderText } from "./RenderText";
-import { PostcardHeader } from "../Postcard/PostcardHeader";
-import { PostCardH2 } from "../Postcard/PostcardH2";
-import { UpvoteSection } from "../Postcard/UpvoteSection";
-import { Comment } from "../Comments/Comment";
+import { RenderText } from "../common/RenderText";
+import { PostcardHeader } from "./PostcardHeader";
+import { PostCardH2 } from "./PostcardH2";
+import { UpvoteSection } from "./UpvoteSection";
+import { CommentSection } from "../Comments/CommentSection";
 
 export const PostCard = ({
   by,
@@ -30,7 +27,7 @@ export const PostCard = ({
   text,
   time,
   score = 0,
-  descendants,
+  descendants = 0,
   kids,
   type,
 }: PostCardProps) => {
@@ -50,15 +47,7 @@ export const PostCard = ({
 
         {/* Since job type doesn't have any comments related */}
         {type !== "job" && (
-          <div className="flex flex-col gap-1 mt-2">
-            <div className="flex ml-9">
-              <Comment descendants={descendants} />
-              <UpvoteSection score={score} view="mobile" />
-            </div>
-
-            {/* Comments section */}
-            <Comments descendants={descendants} kids={kids} />
-          </div>
+          <CommentSection descendants={descendants} score={score} kids={kids} />
         )}
       </div>
 
