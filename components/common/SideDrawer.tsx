@@ -15,8 +15,6 @@ import { Button } from "../ui/button";
 import { Logo } from "./Navbar";
 
 export const SideDrawer = () => {
-  // const pathname = usePathname(); // Get the current path for active link styling
-
   return (
     <Sheet>
       <SheetTrigger asChild>

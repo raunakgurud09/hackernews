@@ -7,7 +7,14 @@ export const Navbar = () => {
   return (
     <div className="w-full border border-b sticky top-0 bg-background py-4">
       <div className="container max-w-[960px] px-3 mx-auto flex items-center justify-between">
-        <SideDrawer />
+        <div>
+          <div className="hidden sm:flex">
+            <Logo />
+          </div>
+          <div className="flex sm:hidden cursor-pointer">
+            <SideDrawer />
+          </div>
+        </div>
         <div className="flex gap-4 items-center">
           <ThemeToggle />
           <Button variant="outline" size="icon">
