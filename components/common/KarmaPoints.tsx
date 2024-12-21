@@ -1,7 +1,6 @@
 "use client";
 
 import { useAuth } from "@/context/AuthProvider";
-import { Button } from "../ui/button";
 import {
   Tooltip,
   TooltipContent,
@@ -15,9 +14,9 @@ export const KarmaPoints = ({ points = 0 }) => {
     <TooltipProvider>
       <Tooltip>
         <TooltipTrigger>
-          <Button variant="outline" size="icon" className="w-fit min-w-9 p-1">
+          <div className="w-fit min-w-9 h-9 flex items-center justify-center p-1 border rounded-md hover:bg-accent text-sm">
             {points || user?.karma}
-          </Button>
+          </div>
         </TooltipTrigger>
         <TooltipContent>
           <p className="text-white">Karma</p>
