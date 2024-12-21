@@ -6,15 +6,14 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
-// import { sleep } from "@/lib/utils";
 import { Avatar } from "./Avatar";
-import { Button } from "../ui/button";
 import { CalendarDays } from "lucide-react";
 import { createHNUserPageUrl } from "@/utils/string";
 import Link from "next/link";
 import { RenderText } from "./RenderText";
 import { Skeleton } from "../ui/skeleton";
 import { getJoinedAt } from "@/lib/dayjs";
+import { KarmaPoints } from "./KarmaPoints";
 
 type ProfileViewProps = {
   by: string | undefined;
@@ -69,13 +68,7 @@ export const ProfileView = ({ by, size = 36 }: ProfileViewProps) => {
           <div className="">
             <div className=" flex gap-2 items-start justify-between">
               <Avatar by={userData?.id} size={60} karma={userData.karma} />
-              <Button
-                variant="outline"
-                size="icon"
-                className="text-xs w-fit p-1 min-w-9"
-              >
-                {userData.karma}
-              </Button>
+              <KarmaPoints points={userData.karma} />
             </div>
             <div>
               <Link target="_blank" href={createHNUserPageUrl(userData.id)}>

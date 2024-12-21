@@ -55,6 +55,7 @@ export default async function Page({
 
   return (
     <main className="w-full overflow-y-auto max-h-[calc(100vh-70px)] border-r">
+      {/* <PostTopBanner type={type} /> */}
       <div className="flex flex-col ">
         {posts.map((post, idx) => {
           return <PostCard {...post} key={idx} />;

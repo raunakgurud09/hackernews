@@ -29,14 +29,14 @@ export default function LoginPage() {
   };
 
   return (
-    <main className="min-h-screen flex flex-col items-center justify-start mt-20">
+    <main className="min-h-screen flex flex-col items-center justify-start mt-20 p-4">
       <div className="mb-10">
         <div>
           <div className="flex text-2xl font-mono font-medium items-left gap-1 flex-col">
             <h1 className="text-4xl font-bold leading-4 mb-2">Hacker News</h1>
             <div className="flex gap-2">
               <div className="h-4 w-4 rounded-sm bg-primary flex items-center justify-center">
-                <span className="font-bold text-white text-xs font-mono">
+                <span className="font-bold text-white text-xxs font-mono">
                   Y
                 </span>
               </div>
@@ -73,7 +73,9 @@ export default function LoginPage() {
               placeholder="Enter your username"
             />
           </div>
-          {error && <p className="text-red-500 text-xxs text-left">{error}</p>}
+          {error && (
+            <p className="text-destructive text-xxs text-left">{error}</p>
+          )}
           <Button loading={loading} type="submit" className="w-full mt-4">
             Sign In
             <ArrowRight />
