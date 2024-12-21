@@ -3,6 +3,7 @@ import { Geist_Mono, Poppins } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Navbar } from "@/components/common/Navbar";
+import { AuthProvider } from "@/context/AuthProvider";
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
@@ -36,9 +37,11 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {/* <ProgressBar /> */}
-          <Navbar />
-          {children}
+          <AuthProvider>
+            {/* <ProgressBar /> */}
+            <Navbar />
+            {children}
+          </AuthProvider>
         </ThemeProvider>
       </body>
     </html>

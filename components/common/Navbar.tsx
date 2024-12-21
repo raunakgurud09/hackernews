@@ -1,7 +1,8 @@
 import React from "react";
 import { ThemeToggle } from "../ThemeToggle";
-import { Button } from "../ui/button";
 import { SideDrawer } from "./SideDrawer";
+import Link from "next/link";
+import { NavRight } from "./NavRight";
 
 export const Navbar = () => {
   return (
@@ -17,8 +18,7 @@ export const Navbar = () => {
         </div>
         <div className="flex gap-4 items-center">
           <ThemeToggle />
-          <KarmaPoints points={1} />
-          <div className="h-9 w-9 bg-foreground rounded-full"></div>
+          <NavRight />
         </div>
       </div>
     </div>
@@ -27,7 +27,10 @@ export const Navbar = () => {
 
 export const Logo = () => {
   return (
-    <div className="flex text-2xl font-mono font-medium items-center gap-1">
+    <Link
+      href={`/top?page=1`}
+      className="flex text-2xl font-mono font-medium items-center gap-1"
+    >
       <div className="h-9 w-9 rounded-lg bg-primary flex items-center justify-center">
         <span className="font-bold text-white text-xl font-mono">Y</span>
       </div>
@@ -36,14 +39,6 @@ export const Logo = () => {
         <br />
         News
       </h1>
-    </div>
-  );
-};
-
-export const KarmaPoints = ({ points = 0 }) => {
-  return (
-    <Button variant="outline" size="icon">
-      {points} LVL
-    </Button>
+    </Link>
   );
 };

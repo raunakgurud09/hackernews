@@ -11,7 +11,7 @@ import { Avatar } from "./Avatar";
 import { Button } from "../ui/button";
 import { CalendarDays } from "lucide-react";
 import dayjs from "dayjs";
-import { CapitalizeFirstLetter, createHNUserPageUrl } from "@/utils/string";
+import { createHNUserPageUrl } from "@/utils/string";
 import Link from "next/link";
 import { RenderText } from "./RenderText";
 import { Skeleton } from "../ui/skeleton";
@@ -76,7 +76,7 @@ export const ProfileView = ({ by, size = 36 }: ProfileViewProps) => {
             <div>
               <Link target="_blank" href={createHNUserPageUrl(userData.id)}>
                 <p className="text-lg font-medium mt-2 mb-2 hover:underline cursor-pointer">
-                  {CapitalizeFirstLetter(userData.id)}
+                  {userData.id}
                 </p>
               </Link>
               <div className="flex gap-1 items-center mb-1">

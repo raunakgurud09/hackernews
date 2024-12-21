@@ -1,8 +1,8 @@
 import React from "react";
 import { ProfileView } from "../common/ProfileView";
-import { CapitalizeFirstLetter } from "@/utils/string";
 import { Separator } from "../common/Separator";
 import TimeDisplay from "../common/TimeDisplay";
+import Link from "next/link";
 
 type PostcardHeaderProps = {
   by?: string | undefined;
@@ -18,15 +18,18 @@ export const PostcardHeader = ({ by, id, type, time }: PostcardHeaderProps) => {
         <ProfileView by={by} />
         <div>
           <div className="flex gap-2 items-center justify-center">
-            <p className="font-medium text-sm">{CapitalizeFirstLetter(by)}</p>
+            <p className="font-medium text-sm">{by}</p>
             <Separator />
             <TimeDisplay time={time} className="text-xs" />
           </div>
           <div className="flex gap-2 items-center">
             <p className="text-xxs text-muted-foreground">#{type}</p>
-            <p className="hover:underline text-xxs text-muted-foreground text-xss cursor-pointer animate-in transition-all">
+            <Link
+              href={`/comment?id=${id}`}
+              className="hover:underline text-xxs text-muted-foreground text-xss cursor-pointer animate-in transition-all"
+            >
               #{id}
-            </p>
+            </Link>
           </div>
         </div>
       </div>
