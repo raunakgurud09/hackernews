@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useRef, ChangeEvent } from "react";
-import { Comment } from "../Comments/Comment";
+import { CommentBtn } from "./CommentBtn";
 import { Comments } from "../Comments/Comments";
 import { UpvoteSection } from "../Postcard/UpvoteSection";
 import { Button } from "../ui/button";
@@ -40,7 +40,7 @@ export const CommentSection = ({
           onClick={() => setShowTextarea((prev) => !prev)}
           className="cursor-pointer"
         >
-          <Comment descendants={descendants} kids={kids} />
+          <CommentBtn descendants={descendants} kids={kids} />
         </div>
         <UpvoteSection score={score} view="mobile" />
       </div>
