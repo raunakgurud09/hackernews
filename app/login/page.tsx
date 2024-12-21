@@ -11,7 +11,7 @@ import { useState, FormEvent } from "react";
 export default function LoginPage() {
   const [username, setUsername] = useState("");
   const [error, setError] = useState("");
-  const { login } = useAuth();
+  const { login, loading } = useAuth();
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -31,16 +31,36 @@ export default function LoginPage() {
   return (
     <main className="min-h-screen flex flex-col items-center justify-start mt-20">
       <div className="mb-10">
-        {/* <Logo /> */}
-
+        <div>
+          <div className="flex text-2xl font-mono font-medium items-left gap-1 flex-col">
+            <h1 className="text-4xl font-bold leading-4 mb-2">Hacker News</h1>
+            <div className="flex gap-2">
+              <div className="h-4 w-4 rounded-sm bg-primary flex items-center justify-center">
+                <span className="font-bold text-white text-xs font-mono">
+                  Y
+                </span>
+              </div>
+              <div className="text-xxs">
+                <span>Powered by</span>
+                <Link
+                  href="https://www.ycombinator.com/"
+                  target="_blank"
+                  className="ml-1 hover:text-primary transition-all"
+                >
+                  ycombinators
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="max-w-md w-full  p-8 rounded-md shadow border">
         <p
-          className="font-6xl text-left"
-          style={{ fontSize: "40px", fontWeight: "500" }}
+          style={{ fontSize: "2rem", fontWeight: "500" }}
+          className="mb-8 text-center"
         >
           Login
         </p>
-      </div>
-      <div className="max-w-md w-full  p-8 rounded-md shadow border">
         <form onSubmit={handleSubmit} className="">
           <div>
             <Label className="font-normal">Username</Label>
@@ -54,7 +74,7 @@ export default function LoginPage() {
             />
           </div>
           {error && <p className="text-red-500 text-xxs text-left">{error}</p>}
-          <Button type="submit" className="w-full mt-4">
+          <Button loading={loading} type="submit" className="w-full mt-4">
             Sign In
             <ArrowRight />
           </Button>

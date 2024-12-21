@@ -12,6 +12,8 @@ export default {
       xs: "12px",
       sm: "14px",
       xxs: "10px",
+      "4xl": "30px",
+      "9xl": "8rem",
     },
     extend: {
       colors: {
