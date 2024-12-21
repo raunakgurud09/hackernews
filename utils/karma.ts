@@ -124,16 +124,3 @@ export function rgbToHex(r: number, g: number, b: number): string {
     .slice(1)
     .toUpperCase()}`;
 }
-
-// // Example usage:
-// console.log(getLevelColor(1)); // Dark gray
-// console.log(getLevelColor(25)); // Light blue
-// console.log(getLevelColor(50)); // Bright green
-// console.log(getLevelColor(75)); // Vibrant purple
-// console.log(getLevelColor(99)); // Orange
-// console.log(getLevelColor(100)); // Gold
-
-// // Example usage:
-// console.log(getUserLevel(1000)); // Example for 1,000 karma points
-// console.log(getUserLevel(50000)); // Example for 50,000 karma points
-// console.log(getUserLevel(138000)); // Should be 100

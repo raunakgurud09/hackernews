@@ -1,11 +1,11 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { CommentSkeleton } from "../Comments/SingleComment";
 import { Comment } from "./Comment";
 import { TComment, TPostTypesEnum } from "@/types/comment";
 import { ToggleShowComments } from "./ToggleShowComments";
 import { fetchComments } from "@/services/comment";
+import { CommentSkeleton } from "./SingleCommentSkeleton";
 
 export const Comments = ({
   descendants = 0,

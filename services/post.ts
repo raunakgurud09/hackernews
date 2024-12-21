@@ -1,3 +1,4 @@
+import { fetchWrapper } from "@/lib/fetch";
 import { apiEndpoints } from "@/utils/constants";
 
 export const fetchPosts = async (
@@ -51,8 +52,8 @@ export const fetchPost = async (postId: number) => {
 export const getStoryIds = async (type: string) => {
   const apiUrl = apiEndpoints[type] || apiEndpoints["new"];
   try {
-    const response = await fetch(apiUrl, { next: { revalidate: 300 } });
-    const storyIds: number[] = await response.json();
+    const storyIds: number[] = (await fetchWrapper(apiUrl)) || [];
+    return storyIds;
     // TODO: Handle poll IDs
     // storyIds.push(21231804); // poll id
     return storyIds;

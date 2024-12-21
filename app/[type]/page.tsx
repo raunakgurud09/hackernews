@@ -1,7 +1,6 @@
 import { PaginationComponent } from "@/components/common/Pagination";
 import { PostCard } from "@/components/Postcard/PostCard";
-import { fetchPost, fetchPosts } from "@/services/post";
-import { getStoryIds } from "@/utils/Post";
+import { fetchPost, fetchPosts, getStoryIds } from "@/services/post";
 import Image from "next/image";
 import React from "react";
 import astro from "@/public/Images/astro-removebg-preview.png";
