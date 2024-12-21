@@ -49,7 +49,7 @@ export const UserDropDown = () => {
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={() => logout()} className="cursor-pointer">
           <LogOut />
-          <span> SignOut</span>
+          <span> Logout</span>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

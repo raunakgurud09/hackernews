@@ -19,7 +19,7 @@ export const NavRight = () => {
   } else {
     return (
       <Link href={`/login`}>
-        <Button>SignIn</Button>
+        <Button>Login</Button>
       </Link>
     );
   }

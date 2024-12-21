@@ -77,7 +77,7 @@ export default function LoginPage() {
             <p className="text-destructive text-xxs text-left">{error}</p>
           )}
           <Button loading={loading} type="submit" className="w-full mt-4">
-            Sign In
+            Login
             <ArrowRight />
           </Button>
         </form>
