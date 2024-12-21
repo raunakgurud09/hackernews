@@ -31,6 +31,7 @@ export default async function Page({
             <span></span>
           </Link> */}
           <PostCard {...post} key={id} defaultVisible={true} />
+          <div className="mb-20"></div>
         </div>
       </main>
     );

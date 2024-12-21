@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useMemo } from "react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,12 +12,14 @@ import { useAuth } from "@/context/AuthProvider";
 import { Avatar } from "./Avatar";
 import { CalendarDays, LogOut } from "lucide-react";
 import { createHNUserPageUrl } from "@/utils/string";
-import { Button } from "../ui/button";
-import dayjs from "dayjs";
 import Link from "next/link";
+import { Progress } from "../ui/progress";
+import { getJoinedAt } from "@/lib/dayjs";
+import { getUserLevel } from "@/utils/karma";
 
 export const UserDropDown = () => {
   const { user, logout } = useAuth();
+  const level = useMemo(() => getUserLevel(user?.karma || 1), []);
   if (!user) return null;
   return (
     <DropdownMenu>
@@ -27,10 +29,9 @@ export const UserDropDown = () => {
       <DropdownMenuContent className="w-[200px]" align="end">
         <DropdownMenuLabel>
           <div className="font-normal">
-            <div className=" flex gap-2 items-start justify-between">
-              <Button variant="outline" size="icon" className="text-xs">
-                {user.karma}
-              </Button>
+            <div className=" flex flex-col gap-1 items-start justify-between mb-4">
+              <span className="text-xxs">{level} LVL</span>
+              <Progress value={level} style={{ background: "#888" }} />
             </div>
             <div>
               <Link target="_blank" href={createHNUserPageUrl(user.id)}>
@@ -40,9 +41,7 @@ export const UserDropDown = () => {
               </Link>
               <div className="flex gap-1 items-center mb-1">
                 <CalendarDays size={12} />
-                <p className="text-xs">
-                  Joined {dayjs.unix(user.created).format("MMMM YYYY")}
-                </p>
+                <p className="text-xxs">Joined {getJoinedAt(user.created)}</p>
               </div>
             </div>
           </div>

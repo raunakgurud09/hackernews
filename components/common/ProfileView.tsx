@@ -10,11 +10,11 @@ import {
 import { Avatar } from "./Avatar";
 import { Button } from "../ui/button";
 import { CalendarDays } from "lucide-react";
-import dayjs from "dayjs";
 import { createHNUserPageUrl } from "@/utils/string";
 import Link from "next/link";
 import { RenderText } from "./RenderText";
 import { Skeleton } from "../ui/skeleton";
+import { getJoinedAt } from "@/lib/dayjs";
 
 type ProfileViewProps = {
   by: string | undefined;
@@ -69,7 +69,11 @@ export const ProfileView = ({ by, size = 36 }: ProfileViewProps) => {
           <div className="">
             <div className=" flex gap-2 items-start justify-between">
               <Avatar by={userData?.id} size={60} karma={userData.karma} />
-              <Button variant="outline" size="icon" className="text-xs">
+              <Button
+                variant="outline"
+                size="icon"
+                className="text-xs w-fit p-1 min-w-9"
+              >
                 {userData.karma}
               </Button>
             </div>
@@ -82,7 +86,7 @@ export const ProfileView = ({ by, size = 36 }: ProfileViewProps) => {
               <div className="flex gap-1 items-center mb-1">
                 <CalendarDays size={12} />
                 <p className="text-xs">
-                  Joined {dayjs.unix(userData.created).format("MMMM YYYY")}
+                  Joined {getJoinedAt(userData.created)}
                 </p>
               </div>
               <RenderText

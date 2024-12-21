@@ -9,3 +9,7 @@ export const getRelativeTime = (
 ): string => {
   return dayjs.unix(unixTime).fromNow(withoutSuffix);
 };
+
+export const getJoinedAt = (unixTime: number): string => {
+  return dayjs.unix(unixTime).format("MMMM YYYY");
+};

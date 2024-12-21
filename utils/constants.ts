@@ -1,4 +1,5 @@
 export const AVATAR_URL = "https://avatar.iran.liara.run/public/";
+export const BASE_HN_URL = "https://news.ycombinator.com";
 
 export const HN_USER_INFO_PAGE = "https://news.ycombinator.com/user?id=";
 

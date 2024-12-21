@@ -3,6 +3,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useAuth } from "@/context/AuthProvider";
+import { BASE_HN_URL } from "@/utils/constants";
+import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 import { useState, FormEvent } from "react";
 
 export default function LoginPage() {
@@ -26,25 +29,46 @@ export default function LoginPage() {
   };
 
   return (
-    <main className="min-h-screen flex items-center justify-center">
-      <div className="max-w-md w-full space-y-8 p-8 rounded-md shadow border ">
-        <h2 className="text-3xl font-bold text-center">Login</h2>
-        <form onSubmit={handleSubmit} className="space-y-6">
+    <main className="min-h-screen flex flex-col items-center justify-start mt-20">
+      <div className="mb-10">
+        {/* <Logo /> */}
+
+        <p
+          className="font-6xl text-left"
+          style={{ fontSize: "40px", fontWeight: "500" }}
+        >
+          Login
+        </p>
+      </div>
+      <div className="max-w-md w-full  p-8 rounded-md shadow border">
+        <form onSubmit={handleSubmit} className="">
           <div>
-            <Label>Username</Label>
+            <Label className="font-normal">Username</Label>
             <Input
               id="username"
+              required
               type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               placeholder="Enter your username"
             />
           </div>
-          {error && <p className="text-red-500 text-sm text-center">{error}</p>}
-          <Button type="submit" className="w-full">
+          {error && <p className="text-red-500 text-xxs text-left">{error}</p>}
+          <Button type="submit" className="w-full mt-4">
             Sign In
+            <ArrowRight />
           </Button>
         </form>
+        <div className="text-xs text-center mt-4">
+          Don&apos;t have an account ?
+          <Link
+            href={`${BASE_HN_URL}/login?goto=news`}
+            target="_blank"
+            className="ml-1 hover:underline decoration-primary"
+          >
+            <span className="text-primary">Create One!</span>
+          </Link>
+        </div>
       </div>
     </main>
   );
