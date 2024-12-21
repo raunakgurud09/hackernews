@@ -1,5 +1,5 @@
 import { fetchWrapper } from "@/lib/fetch";
-import { API_ENDPOINTS } from "./constants";
+import { apiEndpoints } from "./constants";
 
 export const fetchPosts = async (
   storyIds: number[],
@@ -19,7 +19,7 @@ export const fetchPosts = async (
 };
 
 export const getStoryIds = async (type: string) => {
-  const apiUrl = API_ENDPOINTS[type] || API_ENDPOINTS["new"];
+  const apiUrl = apiEndpoints[type] || apiEndpoints["new"];
   const storyIds: number[] = (await fetchWrapper(apiUrl)) || [];
   return storyIds;
 };
