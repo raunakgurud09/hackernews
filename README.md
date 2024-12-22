@@ -4,7 +4,7 @@ A React-based client for interacting with the Hacker News API, providing functio
 
 ---
 
-![Watch the video on Loom](https://www.loom.com/share/5550319fb2a6484faa1d4b26a2afeb4b?sid=9f0e5cad-1655-4544-b8ca-ca79f975eaed)
+[Watch the video on Loom](https://www.loom.com/share/5550319fb2a6484faa1d4b26a2afeb4b?sid=9f0e5cad-1655-4544-b8ca-ca79f975eaed)
 
 ## Features
 
