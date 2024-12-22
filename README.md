@@ -4,6 +4,8 @@ A React-based client for interacting with the Hacker News API, providing functio
 
 ---
 
+<div style="position: relative; padding-bottom: 65.03918022905366%; height: 0;"><iframe src="https://www.loom.com/embed/baadad4f8e0840e38f2f287aac3aefbd?sid=65b3a1e1-6b31-4c4c-93f8-c7834569c90d" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
+
 ## Features
 
 - **Browse Stories**: View top, new, best, job, show, and ask stories.
