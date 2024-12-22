@@ -11,7 +11,7 @@ const colorCache: { [level: number]: string } = {};
  */
 export function getUserLevel(
   karmaPoints: number,
-  maxKarma: number = 138000,
+  maxKarma: number = 100_000,
   totalLevels: number = 100
 ): number {
   // Check cache first
