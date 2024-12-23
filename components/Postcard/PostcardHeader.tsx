@@ -3,6 +3,7 @@ import { ProfileView } from "../common/ProfileView";
 import { Separator } from "../common/Separator";
 import TimeDisplay from "../common/TimeDisplay";
 import Link from "next/link";
+import { PostMoreOptions } from "./PostMoreOptions";
 
 type PostcardHeaderProps = {
   by?: string | undefined;
@@ -13,7 +14,7 @@ type PostcardHeaderProps = {
 
 export const PostcardHeader = ({ by, id, type, time }: PostcardHeaderProps) => {
   return (
-    <div className="flex gap-8">
+    <div className="flex gap-8 justify-between items-start">
       <div className="flex gap-2 font-lg items-center ">
         <ProfileView by={by} />
         <div>
@@ -33,6 +34,7 @@ export const PostcardHeader = ({ by, id, type, time }: PostcardHeaderProps) => {
           </div>
         </div>
       </div>
+      <PostMoreOptions by={by} />
     </div>
   );
 };

@@ -12,6 +12,7 @@ type PostCardProps = {
   descendants?: number;
   kids?: number[];
   defaultVisible?: boolean;
+  fromPage?: string | undefined;
 };
 
 import { RenderText } from "../common/RenderText";
@@ -19,6 +20,7 @@ import { PostcardHeader } from "./PostcardHeader";
 import { PostCardH2 } from "./PostcardH2";
 import { UpvoteSection } from "./UpvoteSection";
 import { CommentSection } from "../Comments/CommentSection";
+import { cn } from "@/lib/utils";
 
 export const PostCard = ({
   by,
@@ -32,10 +34,15 @@ export const PostCard = ({
   kids,
   type,
   defaultVisible = false,
+  fromPage = "none",
 }: PostCardProps) => {
   return (
     <div className="flex w-full justify-between items-start border-b p-3 md:p-6">
-      <div className="flex flex-col gap-2 w-full sm:w-[90%]">
+      <div
+        className={cn("flex flex-col gap-2 w-full sm:w-[90%]", {
+          "sm:w-[100%]": type === "job" || type === "comment",
+        })}
+      >
         <PostcardHeader by={by} id={id} type={type} time={time} />
         <article className="ml-11">
           <PostCardH2 title={title} url={url} />
@@ -58,7 +65,9 @@ export const PostCard = ({
       </div>
 
       {/* Upvote section */}
-      {type !== "job" && <UpvoteSection score={score} view="desktop" />}
+      {type !== "job" && fromPage !== "comment" ? (
+        <UpvoteSection score={score} view="desktop" />
+      ) : null}
     </div>
   );
 };

@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Navbar } from "@/components/common/Navbar";
 import { AuthProvider } from "@/context/AuthProvider";
+import { Toaster } from "@/components/ui/toaster";
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
@@ -41,6 +42,7 @@ export default function RootLayout({
             {/* <ProgressBar /> */}
             <Navbar />
             {children}
+            <Toaster />
           </AuthProvider>
         </ThemeProvider>
       </body>

@@ -25,7 +25,12 @@ export default async function Page({
       <main className="w-full overflow-y-auto max-h-[calc(100vh-70px)] border-r">
         {post ? (
           <div className="flex flex-col">
-            <PostCard {...post} key={id} defaultVisible={true} />
+            <PostCard
+              {...post}
+              key={id}
+              defaultVisible={true}
+              fromPage={type}
+            />
             <div className="mb-20"></div>
           </div>
         ) : (
