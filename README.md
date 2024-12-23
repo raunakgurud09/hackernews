@@ -4,7 +4,16 @@ Hacker News clone with a modern design. Users can log in, check their karma poin
 
 ---
 
-[Demo link 2](https://www.loom.com/share/5550319fb2a6484faa1d4b26a2afeb4b?sid=9f0e5cad-1655-4544-b8ca-ca79f975eaed)
+
+## Demo Links
+
+### [Project walkthough](https://www.loom.com/share/baadad4f8e0840e38f2f287aac3aefbd?sid=ca8eddd2-e34c-4332-a94b-433ffe2a33e5)
+
+### [Project Tech stack](https://www.loom.com/share/5550319fb2a6484faa1d4b26a2afeb4b?sid=9f0e5cad-1655-4544-b8ca-ca79f975eaed)
+
+## Live URL
+
+### [https://hackersnew.vercel.app/](<https://hackersnew.vercel.app/>)
 
 ## Features
 
